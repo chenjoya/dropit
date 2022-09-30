@@ -81,6 +81,6 @@ torchrun --nproc_per_node=8 train.py --dataset coco --model maskrcnn_resnet50_fp
 
 Comming soon.
 
-## Acknowledgements
+## Implementation
 
-We borrowed codes from https://github.com/facebookresearch/deit and https://github.com/pytorch/vision/tree/main/references/detection. A huge thanks go to them. 
+DeiT and R-CNN are borrowed codes from https://github.com/facebookresearch/deit and https://github.com/pytorch/vision/tree/main/references/detection, respectively. A huge thanks go to them. 
