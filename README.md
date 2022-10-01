@@ -96,7 +96,7 @@ torchrun --nproc_per_node=8 train.py --dataset coco --model maskrcnn_resnet50_fp
 | Faster R-CNN  | 37.0 | - |
 | Faster R-CNN + DropIT $\gamma=90\%$  | **37.2** | - |
 | Mask R-CNN  | 37.9 | 34.5 |
-| DeiT-B + DropIT $\gamma=90\%$  | **38.5** | 34.5 |
+| Mask R-CNN + DropIT $\gamma=80\%$  | **38.5** | 34.5 |
 
 ## Combination with GACT/MESA
 
