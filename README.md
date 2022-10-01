@@ -41,6 +41,13 @@ Choose a gamma to train, e.g. gamma=0.7:
 torchrun --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_node=2 main.py --model deit_tiny_patch16_224 --data-set IMNET --data-path /your/imagenet/data/path --dropit --strategy mink --gamma 0.7
 ```
 
+|  DeiT-Ti | Top-1  |
+|  ----  | ----  |
+| -  | 72.1 |
+| DropIT $\gamma=50\%$  | **72.5** |
+| DropIT $\gamma=60\%$  | **72.4** |
+| DropIT $\gamma=70\%$  | 72.1 |
+
 **DeiT-S and DeiT-B fine-tuning on CIFAR-100**
 
 Download DeiT-S and DeiT-B public ImageNet-1k weights:
@@ -59,6 +66,13 @@ torchrun --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_
 torchrun --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_node=2 main.py --model deit_base_patch16_224 --finetune deit_base_patch16_224-b5f2ef4d.pth --data-set CIFAR --data-path /your/cifar/data/path  --batch-size 384  --opt sgd --lr 0.01 --unscale-lr --weight-decay 0.0001 --epochs 1000 --dropit --strategy mink --gamma 0.9
 ```
 
+|  Model | Top-1  |
+|  ----  | ----  |
+| DeiT-S  | 89.7 |
+| DeiT-S + DropIT $\gamma=90\%$  | **90.1** |
+| DeiT-B  | 90.8 |
+| DeiT-B + DropIT $\gamma=90\%$  | **91.3** |
+
 ### Faster/Mask R-CNN [benchmarks/rcnn](benchmarks/rcnn)
 
 **Faster R-CNN training on COCO**
@@ -76,6 +90,13 @@ Choose a gamma to train, e.g. gamma=0.8:
 ```shell
 torchrun --nproc_per_node=8 train.py --dataset coco --model maskrcnn_resnet50_fpn --batch-size 2 --epochs 26 --lr-steps 16 22 --aspect-ratio-group-factor 3 --weights-backbone ResNet50_Weights.IMAGENET1K_V1 --dropit --strategy mink --gamma 0.8
 ```
+
+|  Model | Box AP | Mask AP  |
+|  ----  | ---- | ---- |
+| Faster R-CNN  | 37.0 | - |
+| Faster R-CNN + DropIT $\gamma=90\%$  | **37.2** | - |
+| Mask R-CNN  | 37.9 | 34.5 |
+| DeiT-B + DropIT $\gamma=90\%$  | **38.5** | 34.5 |
 
 ## Combination with GACT/MESA
 
