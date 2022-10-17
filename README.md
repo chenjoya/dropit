@@ -100,7 +100,58 @@ torchrun --nproc_per_node=8 train.py --dataset coco --model maskrcnn_resnet50_fp
 
 ## Combination with GACT/MESA
 
-Comming soon.
+Comming now in [quantizations/gact](quantizations/gact) and [quantizations/deit-mesa](quantizations/deit-mesa)!
+
+### GACT
+
+We borrow code from https://github.com/LiuXiaoxuanPKU/GACT-ICML
+
+**Install**
+
+```
+cd quantizations/gact/gact
+pip install -e -v .
+```
+
+**DropIT + GACT**
+
+```
+# return to dropit main folder
+cd - 
+
+# training with --gact flag, e.g.
+torchrun --nproc_per_node=2 main.py --data-set CIFAR --data-path /your/cifar/data/path --model deit_small_patch16_224 --batch-size 384 --finetune deit_small_patch16_224-cd65a155.pth --opt sgd --lr 0.01 --unscale-lr --weight-decay 0.0001 --epochs 1000 --autocast --dropit --strategy mink --gamma 0.9 --gact
+```
+
+**DropIT + MESA**
+
+We borrow code from https://github.com/HubHop/deit-mesa and https://github.com/ziplab/Mesa
+
+**Install**
+
+```
+cd quantizations/mesa
+python setup.py develop
+```
+
+**DropIT + MESA**
+
+Mesa has to use the network defined itself rather than from timm. So we integrate DropIT into [quantizations/deit-mesa](quantizations/deit-mesa).
+
+First we hav to change dropit flag in [quantizations/mesa/mesa/custom_fc.py](quantizations/mesa/mesa/custom_fc.py)
+
+```
+use_dropit = True
+```
+
+Then we can start training Mesa with DropIT:
+```
+# go to deit-mesa folder
+cd deit-mesa
+
+# train
+CUDA_VISIBLE_DEVICES=5,6 torchrun --nproc_per_node=2 main.py --model deit_small_patch16_224 --batch-size 384 --data-path /your/cifar/data/path --data-set CIFAR --exp_name deit_small_patch16_224_autocast_mesa_minkx0.9     --num_workers 10 --opt sgd --lr 0.01 --unscale-lr --weight-decay 0.0001 --epoch 1000 --ms_policy config/policy_tiny-8bit.txt --finetune ../deit_small_patch16_224-cd65a155.pth
+```
 
 ## Implementation
 

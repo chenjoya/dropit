@@ -1,0 +1,29 @@
+# Results
+results
+*.log
+*.npz
+benchmark/gnn/data/
+benchmark/gnn/wandb/
+
+# IDE & OS
+.idea
+.DS_Store
+
+# Documents
+*.pdf
+*.png
+*.jpg
+*.pptx
+
+# Python
+*.pyc
+__pycache__
+
+# VIM
+*.swp
+
+# Build
+gact/build
+gact/dist
+gact/gact.egg-info
+gact/gact/cpp_extension/*.so

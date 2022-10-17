@@ -16,7 +16,3 @@ outputs/
 
 # ignore datasets softlinks
 datasets/
-
-# ignore quantizations (dropit combining with gact, mesa)
-# will be released after integrating
-quantizations/
