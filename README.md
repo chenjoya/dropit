@@ -44,9 +44,9 @@ torchrun --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_
 |  DeiT-Ti | Top-1  |
 |  ----  | ----  |
 | -  | 72.1 |
-| DropIT $\gamma=50\%$  | **72.5** |
-| DropIT $\gamma=60\%$  | **72.4** |
-| DropIT $\gamma=70\%$  | 72.1 |
+| DropIT $\gamma$=50%  | **72.5** |
+| DropIT $\gamma$=60%  | **72.4** |
+| DropIT $\gamma$=70%  | 72.1 |
 
 **DeiT-S and DeiT-B fine-tuning on CIFAR-100**
 
@@ -69,9 +69,9 @@ torchrun --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_
 |  Model | Top-1  |
 |  ----  | ----  |
 | DeiT-S  | 89.7 |
-| DeiT-S + DropIT $\gamma=90\%$  | **90.1** |
+| DeiT-S + DropIT $\gamma$=90%  | **90.1** |
 | DeiT-B  | 90.8 |
-| DeiT-B + DropIT $\gamma=90\%$  | **91.3** |
+| DeiT-B + DropIT $\gamma$=90%  | **91.3** |
 
 ### Faster/Mask R-CNN [benchmarks/rcnn](benchmarks/rcnn)
 
@@ -94,9 +94,9 @@ torchrun --nproc_per_node=8 train.py --dataset coco --model maskrcnn_resnet50_fp
 |  Model | Box AP | Mask AP  |
 |  ----  | ---- | ---- |
 | Faster R-CNN  | 37.0 | - |
-| Faster R-CNN + DropIT $\gamma=90\%$  | **37.2** | - |
+| Faster R-CNN + DropIT $\gamma$=90%  | **37.2** | - |
 | Mask R-CNN  | 37.9 | 34.5 |
-| DeiT-B + DropIT $\gamma=90\%$  | **38.5** | 34.5 |
+| Mask R-CNN + DropIT $\gamma$=80%  | **38.5** | 34.5 |
 
 ## Combination with GACT/MESA
 
