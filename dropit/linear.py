@@ -60,8 +60,10 @@ class _DropITLinear(Function):
 
 linear_without_autocast = _DropITLinear.apply
 
-def forward(self, x): 
-    if self.dropiter.autocast:
-        return linear_with_autocast(x, self.weight, self.bias, self.dropiter)
+def forward(self, x):
+    if self.training:
+        x = linear_with_autocast(x, self.weight, self.bias, self.dropiter) \
+            if self.dropiter.autocast else linear_without_autocast(x, self.weight, self.bias, self.dropiter)
     else:
-        return linear_without_autocast(x, self.weight, self.bias, self.dropiter)
+        x = F.linear(x, self.weight, self.bias)
+    return x

@@ -1,13 +1,15 @@
-import torch
+import torch, transformers
 from torch import nn
 from functools import partial
 
 from .linear import forward as linear_forward
 from .conv2d import forward as conv2d_forward
+from .gpt2conv1d import forward as gpt2conv1d_forward
 
 supports = {
     nn.Linear: linear_forward,
     nn.Conv2d: conv2d_forward,
+    transformers.pytorch_utils.Conv1D: gpt2conv1d_forward
 }
 
 class DropITer(object):
@@ -72,7 +74,7 @@ class DropITer(object):
             dropiter.autocast = autocast # just for recording
             model.forward = partial(supports[_type], model)
             model.dropiter = dropiter
-            print(f"{_type.__name__}.forward => dropit.{_type.__name__}.forward")
+            print(f"{_type}.forward => dropit.{_type}.forward")
         for child in model.children():
             DropITer.transfer(child, strategy, gamma, autocast)
         return model
