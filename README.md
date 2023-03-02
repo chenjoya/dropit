@@ -2,7 +2,14 @@
 
 PyTorch implementation of [DropIT: Dropping Intermediate Tensors for Memory-Efficient DNN Training (ICLR'23)](https://openreview.net/forum?id=Kn6i2BZW69w).
 
-![](dropit.jpg)
+**Abstract**: 
+A standard hardware bottleneck when training deep neural networks is GPU memory. The bulk of memory is occupied by caching intermediate tensors for gradient computation in the backward pass. We propose a novel method to reduce this footprint - Dropping Intermediate Tensors (DropIT).  DropIT drops min-k elements of the intermediate tensors and approximates gradients from the sparsified tensors in the backward pass. Theoretically, DropIT reduces noise on estimated gradients and therefore has a higher rate of convergence than vanilla-SGD. Experiments show that we can drop up to 90\% of the intermediate tensor elements in fully-connected and convolutional layers while achieving higher testing accuracy for Visual Transformers and Convolutional Neural Networks on various tasks (\eg, classification, object detection, instance segmentation). 
+
+![](dropit.png)
+
+## News
+
+**[2023/03/02]** We add a support of DropIT for GPT-2 model. So you can try DropIT with [ColossalAI/ChatGPT](https://github.com/hpcaitech/ColossalAI/tree/main/applications/ChatGPT) to train GPT-2 + RLHF to reduce GPU memory!
 
 ## Installation
 
@@ -45,9 +52,9 @@ torchrun --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_
 |  DeiT-Ti | Top-1  |
 |  ----  | ----  |
 | -  | 72.1 |
-| DropIT $\gamma$=50%  | **72.5** |
-| DropIT $\gamma$=60%  | **72.4** |
-| DropIT $\gamma$=70%  | 72.1 |
+| DropIT $\gamma$=50% [download](https://drive.google.com/file/d/1WjYXvgx4pOlMUCYV9FRyhry6ckaMgNPk/view?usp=sharing) | **72.5** |
+| DropIT $\gamma$=60% [download](https://drive.google.com/file/d/1D5eks5ukFIPtf_xHsrFci71WOslXyLNZ/view?usp=sharing) | **72.4** |
+| DropIT $\gamma$=70% [download](https://drive.google.com/file/d/1pfMg4Ltqjv8bUyDcdNH-n3VD65_CZTwF/view?usp=sharing) | 72.1 |
 
 **DeiT-S and DeiT-B fine-tuning on CIFAR-100**
 
@@ -97,7 +104,9 @@ torchrun --nproc_per_node=8 train.py --dataset coco --model maskrcnn_resnet50_fp
 | Faster R-CNN  | 37.0 | - |
 | Faster R-CNN + DropIT $\gamma$=90%  | **37.2** | - |
 | Mask R-CNN  | 37.9 | 34.5 |
-| Mask R-CNN + DropIT $\gamma$=80%  | **38.5** | 34.5 |
+| Mask R-CNN + DropIT $\gamma$=80% [download](https://drive.google.com/file/d/1NaAEbdE7G7hfzKhOPdMOgV0G0M1uC6-C/view?usp=sharing) | **38.5** | 34.5 |
+
+Due to my tight cloud disk space, only some important weights have been uploaded :joy:
 
 ## Combination with GACT/MESA
 
