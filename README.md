@@ -52,9 +52,9 @@ torchrun --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_
 |  DeiT-Ti | Top-1  |
 |  ----  | ----  |
 | -  | 72.1 |
-| DropIT $\gamma$=50% [download](https://drive.google.com/file/d/1WjYXvgx4pOlMUCYV9FRyhry6ckaMgNPk/view?usp=sharing) | **72.5** |
-| DropIT $\gamma$=60% [download](https://drive.google.com/file/d/1D5eks5ukFIPtf_xHsrFci71WOslXyLNZ/view?usp=sharing) | **72.4** |
-| DropIT $\gamma$=70% [download](https://drive.google.com/file/d/1pfMg4Ltqjv8bUyDcdNH-n3VD65_CZTwF/view?usp=sharing) | 72.1 |
+| DropIT $\gamma$=50% | **72.5** |
+| DropIT $\gamma$=60% | **72.4** |
+| DropIT $\gamma$=70% | 72.1 |
 
 **DeiT-S and DeiT-B fine-tuning on CIFAR-100**
 
@@ -104,9 +104,7 @@ torchrun --nproc_per_node=8 train.py --dataset coco --model maskrcnn_resnet50_fp
 | Faster R-CNN  | 37.0 | - |
 | Faster R-CNN + DropIT $\gamma$=90%  | **37.2** | - |
 | Mask R-CNN  | 37.9 | 34.5 |
-| Mask R-CNN + DropIT $\gamma$=80% [download](https://drive.google.com/file/d/1NaAEbdE7G7hfzKhOPdMOgV0G0M1uC6-C/view?usp=sharing) | **38.5** | 34.5 |
-
-Due to my tight cloud disk space, only some important weights have been uploaded :joy:
+| Mask R-CNN + DropIT $\gamma$=80% | **38.5** | 34.5 |
 
 ## Combination with GACT/MESA
 
